@@ -99,7 +99,7 @@ let app = angular
                     //Popup message
                     const popupMessage = {
                         type: "warning",
-                        body: "Event : " + nextEvent.eventName + " is overdue"
+                        body: "Event : " + nextEvent.eventName + " is recently overdue"
                     };
                     //Display popup
                     pop(popupMessage);
