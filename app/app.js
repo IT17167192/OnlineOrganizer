@@ -15,7 +15,7 @@ let app = angular
 
         //Toaster popup function
         const pop = function (message) {
-            let toastInstance = toaster.pop({type: message.type, body: message.body});
+            toaster.pop({type: message.type, body: message.body});
         };
 
         //returns the next event
@@ -69,6 +69,8 @@ let app = angular
             return;
         };
 
+        //Time like 12:00 PM will be converted to 12:00:00
+        //24H clock time generator function
         const getTimeFromLocaleString = (eventDate, eventTime) => {
             let date = eventDate.split('-');
             let time = eventTime.split(' ')[0].split(':');
@@ -85,7 +87,7 @@ let app = angular
                 return new Date(date[0], (date[1] - 1), date[2], "00", time[1]);
             }
         };
-
+        //Use for countdown of the nearest event
         $interval(function () {
             let nextEvent = $scope.getNextEvent();
             if (nextEvent) {
@@ -96,6 +98,8 @@ let app = angular
                 $scope.rHours = Math.floor((t / (1000 * 60 * 60)) % 24);
                 $scope.rDays = Math.floor(t / (1000 * 60 * 60 * 24));
                 if ($scope.rDays === 0 && $scope.rHours === 0 && $scope.rMinutes === 0 && $scope.rSeconds === 0) {
+                    //Times up
+                    //overdue events should be deleted
                     //Popup message
                     const popupMessage = {
                         type: "warning",
@@ -140,7 +144,7 @@ let app = angular
                 eventsOrderByDate = eventsOrderByDate.filter(event => event.eventsUnderDate.length > 0);
                 eventsOrderByDate = getEventsOrderByDate(event, eventsOrderByDate);
 
-                //Re initializing variables
+                //Re-initializing variables
                 $scope.eventName = '';
                 $scope.eventTime = new Date().toLocaleString('en-US', {
                     hour: 'numeric',
@@ -152,6 +156,10 @@ let app = angular
 
             } else {
                 //has errors
+                //setting errors
+                //If name is null, Then errorName is assigned
+                //If the date is not a future date, Then errorDate is assigned
+                //if the time is not future time, Then errorTime is assigned
                 $scope.error = {
                     show: true,
                     errorName: !$scope.eventName ? 'Name cannot be empty' : '',
@@ -225,6 +233,7 @@ let app = angular
 
         $scope.editEvent = (id) => {
             let eventObject;
+            //Retrieving the event object that matches to the given id
             $scope.eventsOrderByDate.forEach(eventByDate => {
                 eventObject = eventByDate.eventsUnderDate.filter(event => event.id === id);
             });
@@ -258,9 +267,9 @@ let app = angular
         //given date string convert to dd/MM/yyyy format
         const dateConvert = (dateStr) => {
             let date = new Date(dateStr),
-                mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+                month = ("0" + (date.getMonth() + 1)).slice(-2),
                 day = ("0" + date.getDate()).slice(-2);
-            return [date.getFullYear(), mnth, day].join("-");
+            return [date.getFullYear(), month, day].join("-");
         };
 
         //generate and return events ordered by dates
@@ -272,6 +281,7 @@ let app = angular
             };
 
             if (eventsOrderByDate.length === 0) {
+                //There are no events and user tries to add the first one
                 eventsOrderByDate.push({
                     distinctDate: event.eventDate,
                     eventsUnderDate: [{
@@ -283,9 +293,12 @@ let app = angular
                     }]
                 });
             } else {
+                //variable keep track about the date is exists or not in the list
                 let dateExist = false;
                 eventsOrderByDate.forEach(eventOrderByDate => {
+                    //If the date is found
                     if (dateConvert(eventOrderByDate.distinctDate) === dateConvert(event.eventDate)) {
+                        //Add event under the exist date
                         eventOrderByDate.eventsUnderDate.push({
                             id: event.id,
                             eventName: event.eventName,
@@ -299,6 +312,7 @@ let app = angular
                 });
 
                 if (!dateExist) {
+                    //If the date isn't found, then add new event under new date
                     eventsOrderByDate.push({
                         distinctDate: event.eventDate,
                         eventsUnderDate: [{
@@ -313,6 +327,7 @@ let app = angular
             }
             //Display popup message
             pop(popupMessage);
+            //returning new instance of eventsOrderByDate
             return eventsOrderByDate;
         };
 
