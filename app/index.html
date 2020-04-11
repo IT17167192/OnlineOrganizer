@@ -75,7 +75,8 @@
             <div class="row">
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
                     <div class="card">
-                        <div class="card-header bg-dark btn-outline-info" style="color: #2196F3;">{{eventsForSelectedDate.length > 0 ?
+                        <div class="card-header bg-dark btn-outline-info" style="color: #2196F3;">
+                            {{eventsForSelectedDate.length > 0 ?
                             'Nearest upcoming event for selected date': 'Nearest upcoming event'}}
                         </div>
                         <div class="card-body">
@@ -100,7 +101,9 @@
             <div class="row mt-5 mb-5">
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
                     <div class="card">
-                        <div class="card-header bg-dark btn-outline-info" style="color: #2196F3;">Events For Selected Date</div>
+                        <div class="card-header bg-dark btn-outline-info" style="color: #2196F3;">Events For Selected
+                            Date
+                        </div>
                         <div class="card-body">
                             <div ng-repeat="eventByDate in eventsForSelectedDate | orderBy: 'distinctDate'"
                                  class="alert alert-info mt-2" role="alert">

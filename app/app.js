@@ -205,10 +205,10 @@ let app = angular
                 eventByDate.eventsUnderDate = eventByDate.eventsUnderDate.filter(event => event.id !== id);
                 //if the action performed by the user
                 //Display popup message
-                if(action === 'userDelete'){
+                if (action === 'userDelete') {
                     const popupMessage = {
-                      type: "success",
-                      body: "Event is deleted successfully!"
+                        type: "success",
+                        body: "Event is deleted successfully!"
                     };
                     pop(popupMessage);
                 }
