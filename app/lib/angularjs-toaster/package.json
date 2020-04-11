@@ -1,0 +1,76 @@
+{
+  "_from": "angularjs-toaster",
+  "_id": "angularjs-toaster@3.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-Upv5lkyrWWv9aIK4Jo7X9nCp1tPaWerSEeUrdjibm0GhwuW0/aoaUjn8Ou7IS8/QIGZspXrXHWGTa/CRBOj6Jg==",
+  "_location": "/angularjs-toaster",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "angularjs-toaster",
+    "name": "angularjs-toaster",
+    "escapedName": "angularjs-toaster",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/angularjs-toaster/-/angularjs-toaster-3.0.0.tgz",
+  "_shasum": "0da1c96c788e121f1c1caf2cc5e79d47412a3eed",
+  "_spec": "angularjs-toaster",
+  "_where": "C:\\Angular\\Assignment\\OnlineOrganizer",
+  "author": {
+    "name": "Jiri Kavulak, Stabzs"
+  },
+  "bugs": {
+    "url": "https://github.com/jirikavi/AngularJS-Toaster/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "description": "AngularJS Toaster is a customized version of toastr non-blocking notification javascript library",
+  "devDependencies": {
+    "angular": ">1.2.6",
+    "angular-animate": "~1.2.8",
+    "angular-mocks": "^1.4.7",
+    "coveralls": "2.13.1",
+    "jasmine-core": "^2.3.4",
+    "karma": "1.7.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-cli": "1.0.1",
+    "karma-coverage": "^1.1.1",
+    "karma-jasmine": "^1.1.0",
+    "uglify-js": "3.4.9"
+  },
+  "homepage": "https://github.com/jirikavi/AngularJS-Toaster#readme",
+  "jspm": {
+    "main": "toaster",
+    "dependencies": {
+      "css": "jspm:css@*"
+    },
+    "shim": {
+      "toaster": {
+        "deps": [
+          "./toaster.css!"
+        ]
+      }
+    }
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "name": "angularjs-toaster",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jirikavi/AngularJS-Toaster.git"
+  },
+  "scripts": {
+    "build": "uglifyjs --compress --mangle --output toaster.min.js --comments -- toaster.js",
+    "coverage": "karma start karma.coverage.js",
+    "test": "karma start"
+  },
+  "version": "3.0.0"
+}
