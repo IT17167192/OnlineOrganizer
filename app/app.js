@@ -1,6 +1,7 @@
 let app = angular
     .module('OnlineOrganizer', ['ngMaterial', 'toaster', 'ngAnimate'])
     .controller("eventDetails", function ($scope, $interval, toaster) {
+
         $scope.eventTime = new Date().toLocaleString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true});
         $scope.eventDate = new Date();
 
@@ -87,17 +88,37 @@ let app = angular
                 return new Date(date[0], (date[1] - 1), date[2], "00", time[1]);
             }
         };
+
         //Use for countdown of the nearest event
         $interval(function () {
             let nextEvent = $scope.getNextEvent();
             if (nextEvent) {
-                let time = getTimeFromLocaleString(dateConvert(nextEvent.eventDate), nextEvent.eventTime);
-                let t = Date.parse(time) - Date.now();
-                $scope.rSeconds = Math.floor((t / 1000) % 60);
-                $scope.rMinutes = Math.floor((t / 1000 / 60) % 60);
-                $scope.rHours = Math.floor((t / (1000 * 60 * 60)) % 24);
-                $scope.rDays = Math.floor(t / (1000 * 60 * 60 * 24));
-                if ($scope.rDays === 0 && $scope.rHours === 0 && $scope.rMinutes === 0 && $scope.rSeconds === 0) {
+                //Check whether the next event is already expired or not
+                if((getTimeInStandardHours(nextEvent.eventTime) > getTimeInStandardHours(new Date().toLocaleString('en-US', {
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hour12: true
+                })))){
+                    let time = getTimeFromLocaleString(dateConvert(nextEvent.eventDate), nextEvent.eventTime);
+                    let t = Date.parse(time) - Date.now();
+                    $scope.rSeconds = Math.floor((t / 1000) % 60);
+                    $scope.rMinutes = Math.floor((t / 1000 / 60) % 60);
+                    $scope.rHours = Math.floor((t / (1000 * 60 * 60)) % 24);
+                    $scope.rDays = Math.floor(t / (1000 * 60 * 60 * 24));
+                    if ($scope.rDays === 0 && $scope.rHours === 0 && $scope.rMinutes === 0 && $scope.rSeconds === 0) {
+                        //Times up
+                        //overdue events should be deleted
+                        //Popup message
+                        const popupMessage = {
+                            type: "warning",
+                            body: "Event : " + nextEvent.eventName + " is recently overdue"
+                        };
+                        //Display popup
+                        pop(popupMessage);
+                        $scope.deleteEvent(nextEvent.id, "overdue");
+                    }
+                }else{
+                    //If expired
                     //Times up
                     //overdue events should be deleted
                     //Popup message
@@ -126,11 +147,11 @@ let app = angular
                 minute: 'numeric',
                 hour12: true
             }))) || (dateConvert(Date.now()) !== dateConvert($scope.eventDate)))) {
-
                 //no errors
                 $scope.error = {
                     show: $scope.error.show ? !$scope.error.show : false
                 };
+
                 //create event object
                 let event = {
                     id: Date.now(),
@@ -139,6 +160,7 @@ let app = angular
                     eventTimeInStandardHours: getTimeInStandardHours($scope.eventTime),
                     eventDate: $scope.eventDate
                 };
+
                 //getEventsOrderByDate returns all events order by the date
                 //if there are null arrays, clear them
                 eventsOrderByDate = eventsOrderByDate.filter(event => event.eventsUnderDate.length > 0);
@@ -153,7 +175,6 @@ let app = angular
                 });
                 $scope.eventDate = new Date();
                 $scope.eventsOrderByDate = eventsOrderByDate;
-
             } else {
                 //has errors
                 //setting errors
@@ -171,7 +192,6 @@ let app = angular
                     }))) ? 'Time must be a future time' : ''
                 }
             }
-
         };
 
         //get time in 24 hours in order to sort the events by time
@@ -228,7 +248,6 @@ let app = angular
 
             //check for latest once delete action is performed
             $scope.getNextEvent();
-
         };
 
         $scope.editEvent = (id) => {
@@ -253,7 +272,6 @@ let app = angular
 
             $scope.deleteEvent(id, "edit");
             console.log(eventObject);
-
         };
 
         //all key events can be processed
@@ -330,5 +348,4 @@ let app = angular
             //returning new instance of eventsOrderByDate
             return eventsOrderByDate;
         };
-
     });
