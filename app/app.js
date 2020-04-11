@@ -1,6 +1,6 @@
 let app = angular
-    .module('OnlineOrganizer', ['ngMaterial'])
-    .controller("eventDetails", function ($scope, $interval) {
+    .module('OnlineOrganizer', ['ngMaterial', 'toaster', 'ngAnimate'])
+    .controller("eventDetails", function ($scope, $interval, toaster) {
         $scope.eventTime = new Date().toLocaleString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true});
         $scope.eventDate = new Date();
 
@@ -12,8 +12,11 @@ let app = angular
 
         //keep information about errors
         $scope.error = {};
-        //keep information about success messages
-        $scope.success = {};
+
+        //Toaster popup function
+        const pop = function (message) {
+            let toastInstance = toaster.pop({type: message.type, body: message.body});
+        };
 
         //returns the next event
         $scope.getNextEvent = () => {
@@ -93,7 +96,14 @@ let app = angular
                 $scope.rHours = Math.floor((t / (1000 * 60 * 60)) % 24);
                 $scope.rDays = Math.floor(t / (1000 * 60 * 60 * 24));
                 if ($scope.rDays === 0 && $scope.rHours === 0 && $scope.rMinutes === 0 && $scope.rSeconds === 0) {
-                    $scope.deleteEvent(nextEvent.id);
+                    //Popup message
+                    const popupMessage = {
+                        type: "warning",
+                        body: "Event : " + nextEvent.eventName + " is overdue"
+                    };
+                    //Display popup
+                    pop(popupMessage);
+                    $scope.deleteEvent(nextEvent.id, "overdue");
                 }
             }
         }, 1000);
@@ -116,11 +126,6 @@ let app = angular
                 //no errors
                 $scope.error = {
                     show: $scope.error.show ? !$scope.error.show : false
-                };
-                //to show success message
-                $scope.success = {
-                    show: true,
-                    successMessage: 'Event successfully added!'
                 };
                 //create event object
                 let event = {
@@ -146,16 +151,12 @@ let app = angular
                 $scope.eventsOrderByDate = eventsOrderByDate;
 
             } else {
-                //No success message
-                $scope.success = {
-                    show: $scope.success.show ? !$scope.success.show : false
-                };
                 //has errors
                 $scope.error = {
                     show: true,
                     errorName: !$scope.eventName ? 'Name cannot be empty' : '',
                     errorDate: !(dateConvert(Date.now()) <= dateConvert($scope.eventDate)) ? 'Date must be a future date' : '',
-                    errorTime : (getTimeInStandardHours($scope.eventTime) <= getTimeInStandardHours(new Date().toLocaleString('en-US', {
+                    errorTime: (getTimeInStandardHours($scope.eventTime) <= getTimeInStandardHours(new Date().toLocaleString('en-US', {
                         hour: 'numeric',
                         minute: 'numeric',
                         hour12: true
@@ -199,9 +200,18 @@ let app = angular
         }
 
         //delete function
-        $scope.deleteEvent = (id) => {
+        $scope.deleteEvent = (id, action) => {
             $scope.eventsOrderByDate.forEach(eventByDate => {
                 eventByDate.eventsUnderDate = eventByDate.eventsUnderDate.filter(event => event.id !== id);
+                //if the action performed by the user
+                //Display popup message
+                if(action === 'userDelete'){
+                    const popupMessage = {
+                      type: "success",
+                      body: "Event is deleted successfully!"
+                    };
+                    pop(popupMessage);
+                }
             });
             //if there are null arrays, clear them
             $scope.eventsOrderByDate = $scope.eventsOrderByDate.filter(event => event.eventsUnderDate.length > 0);
@@ -220,13 +230,19 @@ let app = angular
             });
 
             if (eventObject) {
-                console.log(eventObject[0]);
+                //Popup message
+                const popupMessage = {
+                    type: "info",
+                    body: eventObject[0].eventName + " edit now!"
+                };
+                //Display popup
+                pop(popupMessage);
                 $scope.eventTime = eventObject[0].eventTime;
                 $scope.eventDate = eventObject[0].eventDate;
                 $scope.eventName = eventObject[0].eventName;
             }
 
-            $scope.deleteEvent(id);
+            $scope.deleteEvent(id, "edit");
             console.log(eventObject);
 
         };
@@ -249,6 +265,12 @@ let app = angular
 
         //generate and return events ordered by dates
         const getEventsOrderByDate = (event, eventsOrderByDate) => {
+            //Popup message
+            const popupMessage = {
+                type: "success",
+                body: "Event is successfully added!"
+            };
+
             if (eventsOrderByDate.length === 0) {
                 eventsOrderByDate.push({
                     distinctDate: event.eventDate,
@@ -289,7 +311,8 @@ let app = angular
                     });
                 }
             }
-
+            //Display popup message
+            pop(popupMessage);
             return eventsOrderByDate;
         };
 

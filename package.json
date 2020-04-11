@@ -12,6 +12,7 @@
     "angular-loader": "^1.7.5",
     "angular-material": "^1.1.21",
     "angular-route": "^1.7.5",
+    "angularjs-toaster": "^3.0.0",
     "bootstrap": "^4.4.1",
     "html5-boilerplate": "0.0.1",
     "jquery": "^3.5.0",

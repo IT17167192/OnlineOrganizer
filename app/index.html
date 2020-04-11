@@ -19,6 +19,8 @@
     <!--    Angular material-->
     <link rel="stylesheet" href="lib/angular-material/angular-material.min.css">
 
+    <!--    Toaster-->
+    <link rel="stylesheet" href="lib/angularjs-toaster/toaster.min.css">
 </head>
 <body ng-app="OnlineOrganizer">
 <!-- As a heading -->
@@ -39,11 +41,6 @@
                 <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-3" ng-show="error.show && error.errorName">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong>{{error.errorName}}</strong>
-                    </div>
-                </div>
-                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-3" ng-show="success.show">
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>{{success.successMessage}}</strong>
                     </div>
                 </div>
             </div>
@@ -124,7 +121,7 @@
                                             <div class="col-4 text-right">
                                                 <button type="button" class="btn btn-danger" data-toggle="tooltip"
                                                         data-placement="bottom" title="Delete"
-                                                        ng-click="deleteEvent(eventUnderDate.id)">
+                                                        ng-click="deleteEvent(eventUnderDate.id, 'userDelete')">
                                                     <img
                                                             ng-src="assets/images/delete.png" alt="delete.png"></button>
                                                 <button type="button" class="btn btn-info" data-toggle="tooltip"
@@ -165,7 +162,7 @@
                                             <div class="col-4 text-right">
                                                 <button class="btn btn-danger" data-toggle="tooltip"
                                                         data-placement="bottom" title="Delete"
-                                                        ng-click="deleteEvent(eventUnderDate.id)">
+                                                        ng-click="deleteEvent(eventUnderDate.id, 'userDelete')">
                                                     <img
                                                             ng-src="assets/images/delete.png" alt="delete.png"></button>
                                                 <button class="btn btn-info" data-toggle="tooltip"
@@ -184,6 +181,7 @@
             </div>
         </div>
     </div>
+    <toaster-container toaster-options="{'time-out': 3000, 'close-button': true}"></toaster-container>
 </main>
 
 
@@ -200,6 +198,8 @@
 <script src="lib/angular-animate/angular-animate.js"></script>
 <script src="lib/angular-aria/angular-aria.min.js"></script>
 <script src="lib/angular-material/angular-material.min.js"></script>
+<!-- Toaster Js-->
+<script src="lib/angularjs-toaster/toaster.min.js"></script>
 <!--Time picker plugin-->
 <script src="assets/scripts/jqueryScripts.js"></script>
 </body>
