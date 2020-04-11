@@ -5,5 +5,4 @@
  * v1.1.21
  */
 md-sidenav.md-THEME_NAME-theme, md-sidenav.md-THEME_NAME-theme md-content {
-    background-color: '{{background-hue-1}}';
-}
+  background-color: '{{background-hue-1}}'; }

@@ -98,7 +98,7 @@ let app = angular
                     hour: 'numeric',
                     minute: 'numeric',
                     hour12: true
-                })))){
+                }))) || (dateConvert(Date.now()) !== dateConvert(nextEvent.eventDate))){
                     let time = getTimeFromLocaleString(dateConvert(nextEvent.eventDate), nextEvent.eventTime);
                     let t = Date.parse(time) - Date.now();
                     $scope.rSeconds = Math.floor((t / 1000) % 60);
@@ -220,7 +220,15 @@ let app = angular
         };
 
         //returns events for the selected date
-        $scope.getEventsForSelectedDate = () => {
+        const getEventsForSelectedDate = (eventsOrderByDate) => {
+            if (eventsOrderByDate) {
+                $scope.eventsForSelectedDate = [];
+                $scope.eventsForSelectedDate = eventsOrderByDate.filter(event => dateConvert(event.distinctDate) === dateConvert($scope.eventDate));
+            }
+        }
+
+        //returns events on calendar date change
+        $scope.getEventsOnCalenderChange = () => {
             if ($scope.eventsOrderByDate) {
                 $scope.eventsForSelectedDate = [];
                 $scope.eventsForSelectedDate = $scope.eventsOrderByDate.filter(event => dateConvert(event.distinctDate) === dateConvert($scope.eventDate));
@@ -343,6 +351,8 @@ let app = angular
                     });
                 }
             }
+
+            getEventsForSelectedDate(eventsOrderByDate);
             //Display popup message
             pop(popupMessage);
             //returning new instance of eventsOrderByDate

@@ -6,6 +6,5 @@
  */
 /*  Only used with Theme processes */
 html.md-THEME_NAME-theme, body.md-THEME_NAME-theme {
-    color: '{{foreground-1}}';
-    background-color: '{{background-color}}';
-}
+  color: '{{foreground-1}}';
+  background-color: '{{background-color}}'; }

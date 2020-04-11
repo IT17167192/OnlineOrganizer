@@ -5,18 +5,11 @@
  * v1.1.21
  */
 md-bottom-sheet.md-THEME_NAME-theme {
-    background-color: '{{background-color}}';
-    border-top-color: '{{background-hue-3}}';
-}
-
-md-bottom-sheet.md-THEME_NAME-theme.md-list md-list-item {
-    color: '{{foreground-1}}';
-}
-
-md-bottom-sheet.md-THEME_NAME-theme .md-subheader {
-    background-color: '{{background-color}}';
-}
-
-md-bottom-sheet.md-THEME_NAME-theme .md-subheader {
-    color: '{{foreground-1}}';
-}
+  background-color: '{{background-color}}';
+  border-top-color: '{{background-hue-3}}'; }
+  md-bottom-sheet.md-THEME_NAME-theme.md-list md-list-item {
+    color: '{{foreground-1}}'; }
+  md-bottom-sheet.md-THEME_NAME-theme .md-subheader {
+    background-color: '{{background-color}}'; }
+  md-bottom-sheet.md-THEME_NAME-theme .md-subheader {
+    color: '{{foreground-1}}'; }

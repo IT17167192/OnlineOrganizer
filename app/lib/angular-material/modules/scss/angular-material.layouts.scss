@@ -5,29 +5,29 @@
  * v1.1.20-master-595fefe
  */
 $font-family: Roboto, 'Helvetica Neue', sans-serif !default;
-$font-size: 10px !default;
+$font-size:   10px !default;
 $display-4-font-size-base: rem(11.20) !default;
 $display-3-font-size-base: rem(5.600) !default;
 $display-2-font-size-base: rem(4.500) !default;
 $display-1-font-size-base: rem(3.400) !default;
-$headline-font-size-base: rem(2.400) !default;
-$title-font-size-base: rem(2.000) !default;
-$subhead-font-size-base: rem(1.600) !default;
-$body-font-size-base: rem(1.400) !default;
-$caption-font-size-base: rem(1.200) !default;
-$baseline-grid: 8px !default;
-$layout-gutter-width: ($baseline-grid * 2) !default;
-$layout-breakpoint-xs: 600px !default;
-$layout-breakpoint-sm: 960px !default;
-$layout-breakpoint-md: 1280px !default;
-$layout-breakpoint-lg: 1920px !default;
+$headline-font-size-base:  rem(2.400) !default;
+$title-font-size-base:     rem(2.000) !default;
+$subhead-font-size-base:   rem(1.600) !default;
+$body-font-size-base:      rem(1.400) !default;
+$caption-font-size-base:   rem(1.200) !default;
+$baseline-grid:            8px !default;
+$layout-gutter-width:      ($baseline-grid * 2) !default;
+$layout-breakpoint-xs:     600px !default;
+$layout-breakpoint-sm:     960px !default;
+$layout-breakpoint-md:     1280px !default;
+$layout-breakpoint-lg:     1920px !default;
 $button-left-right-padding: rem(0.600) !default;
 $icon-size: rem(2.400) !default;
 $app-bar-height: 64px !default;
 $toast-height: $baseline-grid * 3 !default;
 $toast-margin: $baseline-grid * 1 !default;
-$shadow-key-umbra-opacity: 0.2 !default;
-$shadow-key-penumbra-opacity: 0.14 !default;
+$shadow-key-umbra-opacity:      0.2 !default;
+$shadow-key-penumbra-opacity:   0.14 !default;
 $shadow-ambient-shadow-opacity: 0.12 !default;
 $whiteframe-shadow-1dp: 0px 1px 3px 0px rgba(0, 0, 0, $shadow-key-umbra-opacity), 0px 1px 1px 0px rgba(0, 0, 0, $shadow-key-penumbra-opacity), 0px 2px 1px -1px rgba(0, 0, 0, $shadow-ambient-shadow-opacity) !default;
 $whiteframe-shadow-2dp: 0px 1px 5px 0px rgba(0, 0, 0, $shadow-key-umbra-opacity), 0px 2px 2px 0px rgba(0, 0, 0, $shadow-key-penumbra-opacity), 0px 3px 1px -2px rgba(0, 0, 0, $shadow-ambient-shadow-opacity) !default;
@@ -100,8 +100,10 @@ $checkbox-border-width: 2px !default;
 }
 
 
+
 // Layout
 // ------------------------------
+
 
 
 // Button
@@ -123,6 +125,11 @@ $checkbox-border-width: 2px !default;
 
 // Easing Curves
 //--------------------------------------------
+
+
+
+
+
 
 
 // Fab Buttons (shared between buttons.scss and fab*.scss)
@@ -149,9 +156,9 @@ $checkbox-border-width: 2px !default;
 
 @mixin input-placeholder-color($color) {
   $pseudos: '::-webkit-input-placeholder', // For QQ Browser
-  ':-ms-input-placeholder', // For IE
-  '::-ms-input-placeholder', // For Edge
-  '::placeholder';
+            ':-ms-input-placeholder', // For IE
+            '::-ms-input-placeholder', // For Edge
+            '::placeholder';
   $firefox-pseudos: ':-moz-placeholder', '::-moz-placeholder';
 
   // It is important to export every pseudo within its own block, because otherwise the placeholder
@@ -494,25 +501,22 @@ $checkbox-border-width: 2px !default;
 */
 @mixin flex-order-for-name($sizes:null) {
   @if $sizes == null {
-    $sizes: '';
+    $sizes : '';
 
     .flex-order {
-      order: 0;
+     order : 0;
     }
   }
 
   @for $i from -20 through 20 {
-    $order: '';
-    $suffix: '';
+    $order : '';
+    $suffix : '';
 
     @each $s in $sizes {
-      @if $s != '' {
-        $suffix: '#{$s}-#{$i}';
-      } @else {
-        $suffix: '#{$i}';
-      }
+      @if $s != '' { $suffix : '#{$s}-#{$i}'; }
+      @else        { $suffix : '#{$i}';       }
 
-      $order: '.flex-order-#{$suffix}';
+      $order : '.flex-order-#{$suffix}';
     }
 
     #{$order} {
@@ -522,45 +526,34 @@ $checkbox-border-width: 2px !default;
 }
 
 @mixin offset-for-name($sizes:null) {
-  @if $sizes == null {
-    $sizes: '';
-  }
+  @if $sizes == null { $sizes : ''; }
 
   @for $i from 0 through 19 {
-    $offsets: '';
-    $suffix: '';
+    $offsets : '';
+    $suffix : '';
 
     @each $s in $sizes {
-      @if $s != '' {
-        $suffix: '#{$s}-#{$i * 5}';
-      } @else {
-        $suffix: '#{$i * 5}';
-      }
+      @if $s != '' { $suffix : '#{$s}-#{$i * 5}'; }
+      @else        { $suffix : '#{$i * 5}';       }
 
-      $offsets: '.offset-#{$suffix}, .flex-offset-#{$suffix}, .layout-margin .flex-offset-#{$suffix}, .layout-margin .offset-#{$suffix}';
+      $offsets : '.offset-#{$suffix}, .flex-offset-#{$suffix}, .layout-margin .flex-offset-#{$suffix}, .layout-margin .offset-#{$suffix}';
     }
 
     #{$offsets} {
-      @if $i != 0 {
-        @include rtl-prop(margin-left, margin-right, #{$i * 5 + '%'}, auto);
-      } @else {
-        @include rtl-prop(margin-left, margin-right, 0, auto);
-      }
+      @if $i != 0 { @include rtl-prop(margin-left, margin-right, #{$i * 5 + '%'}, auto); }
+      @else { @include rtl-prop(margin-left, margin-right, 0, auto); }
     }
   }
 
   @each $i in 33 {
-    $offsets: '';
-    $suffix: '';
+    $offsets : '';
+    $suffix : '';
 
     @each $s in $sizes {
-      @if $s != '' {
-        $suffix: '#{$s}-#{$i}';
-      } @else {
-        $suffix: '#{$i}';
-      }
+      @if $s != '' {  $suffix : '#{$s}-#{$i}';   }
+      @else        {  $suffix : '#{$i}';         }
 
-      $offsets: '.offset-#{$suffix}, .flex-offset-#{$suffix}, .layout-margin .flex-offset-#{$suffix}, .layout-margin .offset-#{$suffix}';
+      $offsets : '.offset-#{$suffix}, .flex-offset-#{$suffix}, .layout-margin .flex-offset-#{$suffix}, .layout-margin .offset-#{$suffix}';
     }
 
     #{$offsets} {
@@ -569,17 +562,14 @@ $checkbox-border-width: 2px !default;
   }
 
   @each $i in 66 {
-    $offsets: '';
-    $suffix: '';
+    $offsets : '';
+    $suffix : '';
 
     @each $s in $sizes {
-      @if $s != '' {
-        $suffix: '#{$s}-#{$i}';
-      } @else {
-        $suffix: '#{$i}';
-      }
+      @if $s != '' {  $suffix : '#{$s}-#{$i}';   }
+      @else        {  $suffix : '#{$i}';         }
 
-      $offsets: '.offset-#{$suffix}, .flex-offset-#{$suffix}, .layout-margin .flex-offset-#{$suffix}, .layout-margin .offset-#{$suffix}';
+      $offsets : '.offset-#{$suffix}, .flex-offset-#{$suffix}, .layout-margin .flex-offset-#{$suffix}, .layout-margin .offset-#{$suffix}';
     }
 
     #{$offsets} {
@@ -589,12 +579,8 @@ $checkbox-border-width: 2px !default;
 }
 
 @mixin layout-for-name($name: null) {
-  @if $name == null {
-    $name: '';
-  }
-  @if $name != '' {
-    $name: '-#{$name}';
-  }
+  @if $name == null { $name : '';          }
+  @if $name != ''   { $name : '-#{$name}'; }
 
   .layout#{$name}, .layout#{$name}-column, .layout#{$name}-row {
     box-sizing: border-box;
@@ -604,12 +590,8 @@ $checkbox-border-width: 2px !default;
     display: -ms-flexbox;
     display: flex;
   }
-  .layout#{$name}-column {
-    flex-direction: column;
-  }
-  .layout#{$name}-row {
-    flex-direction: row;
-  }
+  .layout#{$name}-column {  flex-direction: column;     }
+  .layout#{$name}-row    {  flex-direction: row;        }
 }
 
 @mixin flex-properties-for-name($name: null) {
@@ -617,45 +599,23 @@ $checkbox-border-width: 2px !default;
   // $name would be something like xs, sm, md, lg, xl
   @if $name != null {
     $flexName: 'flex-#{$name}';
-    $name: '-#{$name}';
+    $name : '-#{$name}';
   } @else {
-    $name: '';
+    $name : '';
   }
 
-  .#{$flexName} {
-    flex: 1;
-    box-sizing: border-box;
-  }
-  // === flex: 1 1 0%;
+  .#{$flexName}             { flex: 1;         box-sizing: border-box; }  // === flex: 1 1 0%;
 
-  .#{$flexName}-grow {
-    flex: 1 1 100%;
-    box-sizing: border-box;
-  }
-  .#{$flexName}-initial {
-    flex: 0 1 auto;
-    box-sizing: border-box;
-  }
-  .#{$flexName}-auto {
-    flex: 1 1 auto;
-    box-sizing: border-box;
-  }
-  .#{$flexName}-none {
-    flex: 0 0 auto;
-    box-sizing: border-box;
-  }
-  .#{$flexName}-noshrink {
-    flex: 1 0 auto;
-    box-sizing: border-box;
-  }
-  .#{$flexName}-nogrow {
-    flex: 0 1 auto;
-    box-sizing: border-box;
-  }
+  .#{$flexName}-grow        { flex: 1 1 100%;  box-sizing: border-box; }
+  .#{$flexName}-initial     { flex: 0 1 auto;  box-sizing: border-box; }
+  .#{$flexName}-auto        { flex: 1 1 auto;  box-sizing: border-box; }
+  .#{$flexName}-none        { flex: 0 0 auto;  box-sizing: border-box; }
+  .#{$flexName}-noshrink    { flex: 1 0 auto;  box-sizing: border-box; }
+  .#{$flexName}-nogrow      { flex: 0 1 auto;  box-sizing: border-box; }
 
   // (1-20) * 5 = 0-100%
   @for $i from 0 through 20 {
-    $value: #{$i * 5 + '%'};
+    $value : #{$i * 5 + '%'};
 
     .#{$flexName}-#{$i * 5} {
       flex: 1 1 100%;
@@ -671,9 +631,7 @@ $checkbox-border-width: 2px !default;
       box-sizing: border-box;
 
       // Required by Chrome M48+ due to http://crbug.com/546034
-      @if $i == 0 {
-        min-width: 0;
-      }
+      @if $i == 0 {  min-width: 0;  }
     }
 
     .layout-column > .#{$flexName}-#{$i * 5} {
@@ -691,9 +649,7 @@ $checkbox-border-width: 2px !default;
         box-sizing: border-box;
 
         // Required by Chrome M48+ due to http://crbug.com/546034
-        @if $i == 0 {
-          min-width: 0;
-        }
+        @if $i == 0 { min-width: 0; }
       }
 
       .layout#{$name}-column > .#{$flexName}-#{$i * 5} {
@@ -703,100 +659,40 @@ $checkbox-border-width: 2px !default;
         box-sizing: border-box;
 
         // Required by Chrome M48+ due to http://crbug.com/546034
-        @if $i == 0 {
-          min-height: 0;
-        }
+        @if $i == 0 { min-height: 0; }
       }
     }
   }
 
   @if ($name == '') {
-    .flex-33 {
-      flex: 1 1 100%;
-      max-width: 33.33%;
-      max-height: 100%;
-      box-sizing: border-box;
-    }
-    .flex-66 {
-      flex: 1 1 100%;
-      max-width: 66.66%;
-      max-height: 100%;
-      box-sizing: border-box;
-    }
-  }
+    .flex-33 { flex: 1 1 100%;  max-width: 33.33%;  max-height: 100%; box-sizing: border-box; }
+    .flex-66 { flex: 1 1 100%;  max-width: 66.66%;  max-height: 100%; box-sizing: border-box; }
+   }
 
   .layout-row {
-    > .#{$flexName}-33 {
-      flex: 1 1 33.33%;
-      max-width: 33.33%;
-      max-height: 100%;
-      box-sizing: border-box;
-    }
-
-    > .#{$flexName}-66 {
-      flex: 1 1 66.66%;
-      max-width: 66.66%;
-      max-height: 100%;
-      box-sizing: border-box;
-    }
+    > .#{$flexName}-33 { flex: 1 1 33.33%;  max-width: 33.33%;  max-height: 100%; box-sizing: border-box; }
+    > .#{$flexName}-66 { flex: 1 1 66.66%;  max-width: 66.66%;  max-height: 100%; box-sizing: border-box; }
   }
 
   .layout-column {
-    > .#{$flexName}-33 {
-      flex: 1 1 33.33%;
-      max-width: 100%;
-      max-height: 33.33%;
-      box-sizing: border-box;
-    }
-
-    > .#{$flexName}-66 {
-      flex: 1 1 66.66%;
-      max-width: 100%;
-      max-height: 66.66%;
-      box-sizing: border-box;
-    }
+    > .#{$flexName}-33 { flex: 1 1 33.33%;  max-width: 100%;  max-height: 33.33%; box-sizing: border-box; }
+    > .#{$flexName}-66 { flex: 1 1 66.66%;  max-width: 100%;  max-height: 66.66%; box-sizing: border-box; }
   }
 
   .layout#{$name}-row {
-    > .#{$flexName}-33 {
-      flex: 1 1 100%;
-      max-width: 33.33%;
-      max-height: 100%;
-      box-sizing: border-box;
-    }
-
-    > .#{$flexName}-66 {
-      flex: 1 1 100%;
-      max-width: 66.66%;
-      max-height: 100%;
-      box-sizing: border-box;
-    }
+    > .#{$flexName}-33 { flex: 1 1 100%;  max-width: 33.33%;  max-height: 100%; box-sizing: border-box; }
+    > .#{$flexName}-66 { flex: 1 1 100%;  max-width: 66.66%;  max-height: 100%; box-sizing: border-box; }
 
     // Required by Chrome M48+ due to http://crbug.com/546034
-    > .flex {
-      min-width: 0;
-    }
+    > .flex { min-width: 0; }
   }
 
   .layout#{$name}-column {
-    > .#{$flexName}-33 {
-      flex: 1 1 100%;
-      max-width: 100%;
-      max-height: 33.33%;
-      box-sizing: border-box;
-    }
-
-    > .#{$flexName}-66 {
-      flex: 1 1 100%;
-      max-width: 100%;
-      max-height: 66.66%;
-      box-sizing: border-box;
-    }
+    > .#{$flexName}-33 { flex: 1 1 100%;  max-width: 100%;  max-height: 33.33%; box-sizing: border-box; }
+    > .#{$flexName}-66 { flex: 1 1 100%;  max-width: 100%;  max-height: 66.66%; box-sizing: border-box; }
 
     // Required by Chrome M48+ due to http://crbug.com/546034
-    > .flex {
-      min-height: 0;
-    }
+    > .flex { min-height: 0; }
   }
 }
 
@@ -816,8 +712,8 @@ $checkbox-border-width: 2px !default;
   .#{$name},
   .#{$name}-start-stretch // defaults
   {
-    justify-content: flex-start;
-    align-content: stretch;
+    justify-content : flex-start;
+    align-content : stretch;
     align-items: stretch;
   }
 
@@ -826,16 +722,18 @@ $checkbox-border-width: 2px !default;
   .#{$name}-start-start,
   .#{$name}-start-center,
   .#{$name}-start-end,
-  .#{$name}-start-stretch {
+  .#{$name}-start-stretch
+  {
     justify-content: flex-start;
   }
 
   // Main Axis Center
-  .#{$name}-center, //stretch
+  .#{$name}-center,           //stretch
   .#{$name}-center-start,
   .#{$name}-center-center,
   .#{$name}-center-end,
-  .#{$name}-center-stretch {
+  .#{$name}-center-stretch
+  {
     justify-content: center;
   }
 
@@ -844,7 +742,8 @@ $checkbox-border-width: 2px !default;
   .#{$name}-end-start,
   .#{$name}-end-center,
   .#{$name}-end-end,
-  .#{$name}-end-stretch {
+  .#{$name}-end-stretch
+  {
     justify-content: flex-end;
   }
 
@@ -853,7 +752,8 @@ $checkbox-border-width: 2px !default;
   .#{$name}-space-around-center,
   .#{$name}-space-around-start,
   .#{$name}-space-around-end,
-  .#{$name}-space-around-stretch {
+  .#{$name}-space-around-stretch
+  {
     justify-content: space-around;
   }
 
@@ -862,7 +762,8 @@ $checkbox-border-width: 2px !default;
   .#{$name}-space-between-center,
   .#{$name}-space-between-start,
   .#{$name}-space-between-end,
-  .#{$name}-space-between-stretch {
+  .#{$name}-space-between-stretch
+  {
     justify-content: space-between;
   }
 
@@ -877,7 +778,8 @@ $checkbox-border-width: 2px !default;
   .#{$name}-center-start,
   .#{$name}-end-start,
   .#{$name}-space-between-start,
-  .#{$name}-space-around-start {
+  .#{$name}-space-around-start
+  {
     align-items: flex-start;
     align-content: flex-start;
   }
@@ -887,7 +789,8 @@ $checkbox-border-width: 2px !default;
   .#{$name}-center-center,
   .#{$name}-end-center,
   .#{$name}-space-between-center,
-  .#{$name}-space-around-center {
+  .#{$name}-space-around-center
+  {
     align-items: center;
     align-content: center;
     max-width: 100%;
@@ -898,7 +801,8 @@ $checkbox-border-width: 2px !default;
   .#{$name}-center-center > *,
   .#{$name}-end-center > *,
   .#{$name}-space-between-center > *,
-  .#{$name}-space-around-center > * {
+  .#{$name}-space-around-center > *
+  {
     max-width: 100%;
     box-sizing: border-box;
   }
@@ -908,7 +812,8 @@ $checkbox-border-width: 2px !default;
   .#{$name}-center-end,
   .#{$name}-end-end,
   .#{$name}-space-between-end,
-  .#{$name}-space-around-end {
+  .#{$name}-space-around-end
+  {
     align-items: flex-end;
     align-content: flex-end;
   }
@@ -918,7 +823,8 @@ $checkbox-border-width: 2px !default;
   .#{$name}-center-stretch,
   .#{$name}-end-stretch,
   .#{$name}-space-between-stretch,
-  .#{$name}-space-around-stretch {
+  .#{$name}-space-around-stretch
+  {
     align-items: stretch;
     align-content: stretch;
   }
@@ -928,7 +834,8 @@ $checkbox-border-width: 2px !default;
 
   // NOTE: these`> *` selectors should only be applied for layout="row" or layout="column" children !!
   .layout-padding-sm > *,
-  .layout-padding > .flex-sm {
+  .layout-padding    > .flex-sm
+  {
     padding: $layout-gutter-width / 4;
   }
 
@@ -936,31 +843,36 @@ $checkbox-border-width: 2px !default;
   .layout-padding-gt-sm,
   .layout-padding-md,
 
-    // NOTE: these`> *` selectors should only be applied for layout="row" or layout="column" children !!
-  .layout-padding > *,
-  .layout-padding-gt-sm > *,
-  .layout-padding-md > *,
-  .layout-padding > .flex,
-  .layout-padding > .flex-gt-sm,
-  .layout-padding > .flex-md {
+  // NOTE: these`> *` selectors should only be applied for layout="row" or layout="column" children !!
+  .layout-padding        > *,
+  .layout-padding-gt-sm  > *,
+  .layout-padding-md     > *,
+
+  .layout-padding        > .flex,
+  .layout-padding        > .flex-gt-sm,
+  .layout-padding        > .flex-md
+  {
     padding: $layout-gutter-width / 2;
   }
 
   // NOTE: these`> *` selectors should only be applied for layout="row" or layout="column" children !!
-  .layout-padding-gt-md > *,
-  .layout-padding-lg > *,
-  .layout-padding-gt-lg > *,
-  .layout-padding > .flex-gt-md,
-  .layout-padding > .flex-lg,
-  .layout-padding > .flex-lg,
-  .layout-padding > .flex-gt-lg {
+  .layout-padding-gt-md  > *,
+  .layout-padding-lg     > *,
+  .layout-padding-gt-lg  > *,
+
+  .layout-padding        > .flex-gt-md,
+  .layout-padding        > .flex-lg,
+  .layout-padding        > .flex-lg,
+  .layout-padding        > .flex-gt-lg
+  {
     padding: $layout-gutter-width / 1;
   }
 
   // Margin enhancements
 
-  .layout-margin-sm > *,
-  .layout-margin > .flex-sm {
+  .layout-margin-sm      > *,
+  .layout-margin         > .flex-sm
+  {
     margin: $layout-gutter-width / 4;
   }
 
@@ -968,23 +880,27 @@ $checkbox-border-width: 2px !default;
   .layout-margin-gt-sm,
   .layout-margin-md,
 
-    // NOTE: these`> *` selectors should only be applied for layout="row" or layout="column" children !!
-  .layout-margin > *,
-  .layout-margin-gt-sm > *,
-  .layout-margin-md > *,
-  .layout-margin > .flex,
-  .layout-margin > .flex-gt-sm,
-  .layout-margin > .flex-md {
+  // NOTE: these`> *` selectors should only be applied for layout="row" or layout="column" children !!
+  .layout-margin         > *,
+  .layout-margin-gt-sm   > *,
+  .layout-margin-md      > *,
+
+  .layout-margin         > .flex,
+  .layout-margin         > .flex-gt-sm,
+  .layout-margin         > .flex-md
+  {
     margin: $layout-gutter-width / 2;
   }
 
   // NOTE: these`> *` selectors should only be applied for layout="row" or layout="column" children !!
-  .layout-margin-gt-md > *,
-  .layout-margin-lg > *,
-  .layout-margin-gt-lg > *,
-  .layout-margin > .flex-gt-md,
-  .layout-margin > .flex-lg,
-  .layout-margin > .flex-gt-lg {
+  .layout-margin-gt-md  > *,
+  .layout-margin-lg     > *,
+  .layout-margin-gt-lg  > *,
+
+  .layout-margin        > .flex-gt-md,
+  .layout-margin        > .flex-lg,
+  .layout-margin        > .flex-gt-lg
+  {
     margin: $layout-gutter-width / 1;
   }
 
@@ -993,7 +909,7 @@ $checkbox-border-width: 2px !default;
   }
 
   .layout-nowrap {
-    flex-wrap: nowrap;
+      flex-wrap: nowrap;
   }
 
   .layout-fill {
@@ -1005,12 +921,12 @@ $checkbox-border-width: 2px !default;
 }
 
 @mixin layouts_for_breakpoint($name:null) {
-  @include flex-order-for-name($name);
-  @include offset-for-name($name);
-  @include layout-align-for-name($name);
+    @include flex-order-for-name($name);
+    @include offset-for-name($name);
+    @include layout-align-for-name($name);
 
-  @include flex-properties-for-name($name);
-  @include layout-for-name($name);
+    @include flex-properties-for-name($name);
+    @include layout-for-name($name);
 }
 
 /*
@@ -1112,7 +1028,7 @@ $checkbox-border-width: 2px !default;
 
 @media (min-width: $layout-breakpoint-md) and (max-width: $layout-breakpoint-lg - 1) {
   // LARGE SCREEN
-  .hide, .hide-gt-xs, .hide-gt-sm, .hide-gt-md {
+  .hide,.hide-gt-xs, .hide-gt-sm, .hide-gt-md {
     &:not(.show-gt-xs):not(.show-gt-sm):not(.show-gt-md):not(.show-lg):not(.show) {
       display: none;
     }

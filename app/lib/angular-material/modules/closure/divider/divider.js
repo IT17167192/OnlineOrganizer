@@ -13,9 +13,9 @@ goog.require('ngmaterial.core');
  */
 MdDividerDirective['$inject'] = ["$mdTheming"];
 angular.module('material.components.divider', [
-    'material.core'
+  'material.core'
 ])
-    .directive('mdDivider', MdDividerDirective);
+  .directive('mdDivider', MdDividerDirective);
 
 /**
  * @ngdoc directive
@@ -36,10 +36,10 @@ angular.module('material.components.divider', [
  *
  */
 function MdDividerDirective($mdTheming) {
-    return {
-        restrict: 'E',
-        link: $mdTheming
-    };
+  return {
+    restrict: 'E',
+    link: $mdTheming
+  };
 }
 
 ngmaterial.components.divider = angular.module("material.components.divider");

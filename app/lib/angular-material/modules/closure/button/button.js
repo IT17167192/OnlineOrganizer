@@ -37,14 +37,14 @@ angular
  * </hljs>
  */
 function MdAnchorDirective($mdTheming) {
-    return {
-        restrict: 'E',
-        link: function postLink(scope, element) {
-            // Make sure to inherit theme so stand-alone anchors
-            // support theme colors for md-primary, md-accent, etc.
-            $mdTheming(element);
-        }
-    };
+  return {
+    restrict : 'E',
+    link : function postLink(scope, element) {
+      // Make sure to inherit theme so stand-alone anchors
+      // support theme colors for md-primary, md-accent, etc.
+      $mdTheming(element);
+    }
+  };
 }
 
 
@@ -127,69 +127,69 @@ function MdAnchorDirective($mdTheming) {
  */
 function MdButtonDirective($mdButtonInkRipple, $mdTheming, $mdAria, $mdInteraction) {
 
-    return {
-        restrict: 'EA',
-        replace: true,
-        transclude: true,
-        template: getTemplate,
-        link: postLink
-    };
+  return {
+    restrict: 'EA',
+    replace: true,
+    transclude: true,
+    template: getTemplate,
+    link: postLink
+  };
 
-    function isAnchor(attr) {
-        return angular.isDefined(attr.href) || angular.isDefined(attr.ngHref) || angular.isDefined(attr.ngLink) || angular.isDefined(attr.uiSref);
+  function isAnchor(attr) {
+    return angular.isDefined(attr.href) || angular.isDefined(attr.ngHref) || angular.isDefined(attr.ngLink) || angular.isDefined(attr.uiSref);
+  }
+
+  function getTemplate(element, attr) {
+    if (isAnchor(attr)) {
+      return '<a class="md-button" ng-transclude></a>';
+    } else {
+      // If buttons don't have type="button", they will submit forms automatically.
+      var btnType = (typeof attr.type === 'undefined') ? 'button' : attr.type;
+      return '<button class="md-button" type="' + btnType + '" ng-transclude></button>';
+    }
+  }
+
+  function postLink(scope, element, attr) {
+    $mdTheming(element);
+    $mdButtonInkRipple.attach(scope, element);
+
+    // Use async expect to support possible bindings in the button label
+    $mdAria.expectWithoutText(element, 'aria-label');
+
+    // For anchor elements, we have to set tabindex manually when the element is disabled.
+    // We don't do this for md-nav-bar anchors as the component manages its own tabindex values.
+    if (isAnchor(attr) && angular.isDefined(attr.ngDisabled) &&
+        !element.hasClass('_md-nav-button')) {
+      scope.$watch(attr.ngDisabled, function(isDisabled) {
+        element.attr('tabindex', isDisabled ? -1 : 0);
+      });
     }
 
-    function getTemplate(element, attr) {
-        if (isAnchor(attr)) {
-            return '<a class="md-button" ng-transclude></a>';
-        } else {
-            // If buttons don't have type="button", they will submit forms automatically.
-            var btnType = (typeof attr.type === 'undefined') ? 'button' : attr.type;
-            return '<button class="md-button" type="' + btnType + '" ng-transclude></button>';
+    // disabling click event when disabled is true
+    element.on('click', function(e){
+      if (attr.disabled === true) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    });
+
+    if (!element.hasClass('md-no-focus')) {
+
+      element.on('focus', function() {
+
+        // Only show the focus effect when being focused through keyboard interaction or programmatically
+        if (!$mdInteraction.isUserInvoked() || $mdInteraction.getLastInteractionType() === 'keyboard') {
+          element.addClass('md-focused');
         }
+
+      });
+
+      element.on('blur', function() {
+        element.removeClass('md-focused');
+      });
     }
 
-    function postLink(scope, element, attr) {
-        $mdTheming(element);
-        $mdButtonInkRipple.attach(scope, element);
-
-        // Use async expect to support possible bindings in the button label
-        $mdAria.expectWithoutText(element, 'aria-label');
-
-        // For anchor elements, we have to set tabindex manually when the element is disabled.
-        // We don't do this for md-nav-bar anchors as the component manages its own tabindex values.
-        if (isAnchor(attr) && angular.isDefined(attr.ngDisabled) &&
-            !element.hasClass('_md-nav-button')) {
-            scope.$watch(attr.ngDisabled, function (isDisabled) {
-                element.attr('tabindex', isDisabled ? -1 : 0);
-            });
-        }
-
-        // disabling click event when disabled is true
-        element.on('click', function (e) {
-            if (attr.disabled === true) {
-                e.preventDefault();
-                e.stopImmediatePropagation();
-            }
-        });
-
-        if (!element.hasClass('md-no-focus')) {
-
-            element.on('focus', function () {
-
-                // Only show the focus effect when being focused through keyboard interaction or programmatically
-                if (!$mdInteraction.isUserInvoked() || $mdInteraction.getLastInteractionType() === 'keyboard') {
-                    element.addClass('md-focused');
-                }
-
-            });
-
-            element.on('blur', function () {
-                element.removeClass('md-focused');
-            });
-        }
-
-    }
+  }
 
 }
 

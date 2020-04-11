@@ -5,9 +5,7 @@
  * v1.1.21
  */
 [md-swipe-left], [md-swipe-right] {
-    touch-action: pan-y;
-}
+  touch-action: pan-y; }
 
 [md-swipe-up], [md-swipe-down] {
-    touch-action: pan-x;
-}
+  touch-action: pan-x; }

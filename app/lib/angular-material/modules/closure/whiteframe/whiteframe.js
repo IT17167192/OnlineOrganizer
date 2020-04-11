@@ -12,8 +12,8 @@ goog.require('ngmaterial.core');
  */
 MdWhiteframeDirective['$inject'] = ["$log"];
 angular
-    .module('material.components.whiteframe', ['material.core'])
-    .directive('mdWhiteframe', MdWhiteframeDirective);
+  .module('material.components.whiteframe', ['material.core'])
+  .directive('mdWhiteframe', MdWhiteframeDirective);
 
 /**
  * @ngdoc directive
@@ -50,31 +50,31 @@ angular
  * </hljs>
  */
 function MdWhiteframeDirective($log) {
-    var DISABLE_DP = -1;
-    var MIN_DP = 1;
-    var MAX_DP = 24;
-    var DEFAULT_DP = 4;
+  var DISABLE_DP = -1;
+  var MIN_DP = 1;
+  var MAX_DP = 24;
+  var DEFAULT_DP = 4;
 
-    return {
-        link: postLink
-    };
+  return {
+    link: postLink
+  };
 
-    function postLink(scope, element, attr) {
-        var oldClass = '';
+  function postLink(scope, element, attr) {
+    var oldClass = '';
 
-        attr.$observe('mdWhiteframe', function (elevation) {
-            elevation = parseInt(elevation, 10) || DEFAULT_DP;
+    attr.$observe('mdWhiteframe', function(elevation) {
+      elevation = parseInt(elevation, 10) || DEFAULT_DP;
 
-            if (elevation != DISABLE_DP && (elevation > MAX_DP || elevation < MIN_DP)) {
-                $log.warn('md-whiteframe attribute value is invalid. It should be a number between ' + MIN_DP + ' and ' + MAX_DP, element[0]);
-                elevation = DEFAULT_DP;
-            }
+      if (elevation != DISABLE_DP && (elevation > MAX_DP || elevation < MIN_DP)) {
+        $log.warn('md-whiteframe attribute value is invalid. It should be a number between ' + MIN_DP + ' and ' + MAX_DP, element[0]);
+        elevation = DEFAULT_DP;
+      }
 
-            var newClass = elevation == DISABLE_DP ? '' : 'md-whiteframe-' + elevation + 'dp';
-            attr.$updateClass(newClass, oldClass);
-            oldClass = newClass;
-        });
-    }
+      var newClass = elevation == DISABLE_DP ? '' : 'md-whiteframe-' + elevation + 'dp';
+      attr.$updateClass(newClass, oldClass);
+      oldClass = newClass;
+    });
+  }
 }
 
 

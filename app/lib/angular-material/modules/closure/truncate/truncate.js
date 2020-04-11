@@ -12,7 +12,7 @@ goog.require('ngmaterial.core');
  */
 MdTruncateController['$inject'] = ["$element"];
 angular.module('material.components.truncate', ['material.core'])
-    .directive('mdTruncate', MdTruncateDirective);
+  .directive('mdTruncate', MdTruncateDirective);
 
 /**
  * @ngdoc directive
@@ -73,11 +73,11 @@ angular.module('material.components.truncate', ['material.core'])
  * </div>
  */
 function MdTruncateDirective() {
-    return {
-        restrict: 'AE',
+  return {
+    restrict: 'AE',
 
-        controller: MdTruncateController
-    };
+    controller: MdTruncateController
+  };
 }
 
 /**
@@ -89,7 +89,7 @@ function MdTruncateDirective() {
  * ngInject
  */
 function MdTruncateController($element) {
-    $element.addClass('md-truncate');
+  $element.addClass('md-truncate');
 }
 
 ngmaterial.components.truncate = angular.module("material.components.truncate");

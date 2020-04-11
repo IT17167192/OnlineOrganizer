@@ -16,8 +16,8 @@ goog.require('ngmaterial.core');
 mdCardDirective['$inject'] = ["$mdTheming"];
 angular.module('material.components.card', [
     'material.core'
-])
-    .directive('mdCard', mdCardDirective);
+  ])
+  .directive('mdCard', mdCardDirective);
 
 
 /**
@@ -130,13 +130,13 @@ angular.module('material.components.card', [
  * </hljs>
  */
 function mdCardDirective($mdTheming) {
-    return {
-        restrict: 'E',
-        link: function ($scope, $element, attr) {
-            $element.addClass('_md');     // private md component indicator for styling
-            $mdTheming($element);
-        }
-    };
+  return {
+    restrict: 'E',
+    link: function ($scope, $element, attr) {
+      $element.addClass('_md');     // private md component indicator for styling
+      $mdTheming($element);
+    }
+  };
 }
 
 ngmaterial.components.card = angular.module("material.components.card");

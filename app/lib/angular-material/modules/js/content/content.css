@@ -5,24 +5,16 @@
  * v1.1.21
  */
 md-content {
-    display: block;
-    position: relative;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
-md-content[md-scroll-y] {
+  display: block;
+  position: relative;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch; }
+  md-content[md-scroll-y] {
     overflow-y: auto;
-    overflow-x: hidden;
-}
-
-md-content[md-scroll-x] {
+    overflow-x: hidden; }
+  md-content[md-scroll-x] {
     overflow-x: auto;
-    overflow-y: hidden;
-}
-
-@media print {
+    overflow-y: hidden; }
+  @media print {
     md-content {
-        overflow: visible !important;
-    }
-}
+      overflow: visible !important; } }

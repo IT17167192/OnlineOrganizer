@@ -5,9 +5,6 @@
  * v1.1.21
  */
 md-backdrop {
-    background-color: '{{background-900-0.0}}';
-}
-
-md-backdrop.md-opaque.md-THEME_NAME-theme {
-    background-color: '{{background-900-1.0}}';
-}
+  background-color: '{{background-900-0.0}}'; }
+  md-backdrop.md-opaque.md-THEME_NAME-theme {
+    background-color: '{{background-900-1.0}}'; }
