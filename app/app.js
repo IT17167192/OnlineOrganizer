@@ -254,7 +254,7 @@ let app = angular
             //if there are null arrays in selectedDate object clear them
             $scope.eventsForSelectedDate = $scope.eventsForSelectedDate.filter(event => event.eventsUnderDate.length > 0);
 
-            //check for latest once delete action is performed
+            //check for latest, once delete action is performed
             $scope.getNextEvent();
         };
 
